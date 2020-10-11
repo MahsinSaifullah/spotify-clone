@@ -22,8 +22,10 @@ function App() {
 			setToken(token);
 			setUser();
 			setPlaylist();
-		} else {
+		} else if (_token) {
 			setToken(_token);
+			setUser();
+			setPlaylist();
 		}
 	}, []);
 

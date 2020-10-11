@@ -9,8 +9,7 @@ const spotify = new SpotifyWebApi();
 
 const PlayerState = (props) => {
 	const initialState = {
-		token:
-			'BQDByjPqG4btlIfyehJYctnUfQzASLDdntIXfs6QkDYXrzAsEtCZ9eSt_Sd_88J5dG1qgFPjnY3Hvpj7nPNKCVen1pDwgFFRJk9MXsce_k05COoZmL9HmY9EwwAo5vgOdSHhyesB1DQnbrjqHw7zf7t1IFw5feoePzoHXWtALdYnS4Jy',
+		token: '',
 		user: null,
 		playlists: [],
 		playing: false,

@@ -1,4 +1,4 @@
-import { SET_USER, SET_TOKEN, SET_PLAYLIST } from '../types';
+import { SET_USER, SET_TOKEN, SET_PLAYLIST, SET_DISCOVER_WEEKLY } from '../types';
 
 export default (state, action) => {
 	console.log(action);
@@ -18,6 +18,12 @@ export default (state, action) => {
 				...state,
 				playlists: action.payload,
 			};
+		case SET_DISCOVER_WEEKLY:
+			return {
+				...state,
+				discoverWeekly: action.payload,
+			};
+		
 
 		default:
 			return state;

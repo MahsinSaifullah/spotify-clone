@@ -3,17 +3,19 @@ import PlayerReducer from './PlayerReducer';
 import PlayerContext from './PlayerContext';
 import SpotifyWebApi from 'spotify-web-api-js';
 
-import { SET_USER, SET_TOKEN, SET_PLAYLIST } from '../types';
+import { SET_USER, SET_TOKEN, SET_PLAYLIST, SET_DISCOVER_WEEKLY } from '../types';
 
 const spotify = new SpotifyWebApi();
 
 const PlayerState = (props) => {
 	const initialState = {
-		token: '',
+		token:
+		"",
 		user: null,
 		playlists: [],
 		playing: false,
 		item: null,
+		discoverWeekly: null
 	};
 
 	const [state, dispatch] = useReducer(PlayerReducer, initialState);
@@ -31,7 +33,6 @@ const PlayerState = (props) => {
 
 	const setUser = async () => {
 		const _user = await spotify.getMe();
-
 		dispatch({
 			type: SET_USER,
 			payload: _user,
@@ -40,13 +41,19 @@ const PlayerState = (props) => {
 
 	const setPlaylist = async () => {
 		const playlist = await spotify.getUserPlaylists();
-		console.log('Playlist: ', playlist);
-
 		dispatch({
 			type: SET_PLAYLIST,
 			payload: playlist,
 		});
 	};
+
+	const setDiscoverWeekly = async () => {
+		const discoverWeekly = await spotify.getPlaylist('37i9dQZEVXcDJytPqwdT0j');
+		dispatch({
+			type: SET_DISCOVER_WEEKLY,
+			payload: discoverWeekly
+		})
+	}
 
 	return (
 		<PlayerContext.Provider
@@ -56,9 +63,11 @@ const PlayerState = (props) => {
 				playlists: state.playlists,
 				playing: state.playing,
 				item: state.item,
+				discoverWeekly: state.discoverWeekly,
 				setToken,
 				setUser,
 				setPlaylist,
+				setDiscoverWeekly
 			}}
 		>
 			{props.children}

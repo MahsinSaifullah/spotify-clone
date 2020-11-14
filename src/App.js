@@ -7,7 +7,7 @@ import { getTokenFromResponse } from './utility/spotify';
 import PlayerContext from './context/player/PlayerContext';
 
 function App() {
-	const { token, user, setToken, setUser, setPlaylist } = useContext(
+	const { token, setToken, setUser, setPlaylist, setDiscoverWeekly } = useContext(
 		PlayerContext
 	);
 
@@ -22,10 +22,12 @@ function App() {
 			setToken(token);
 			setUser();
 			setPlaylist();
+			setDiscoverWeekly();
 		} else if (_token) {
 			setToken(_token);
 			setUser();
 			setPlaylist();
+			setDiscoverWeekly();
 		}
 	}, []);
 

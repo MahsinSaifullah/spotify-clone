@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import './App.css';
 
 import Login from './components/Login/Login';
@@ -7,31 +7,36 @@ import { getTokenFromResponse } from './utility/spotify';
 import PlayerContext from './context/player/PlayerContext';
 
 function App() {
-	const { token, setToken, setUser, setPlaylist, setDiscoverWeekly } = useContext(
-		PlayerContext
-	);
+  const {
+    token,
+    setToken,
+    setUser,
+    setPlaylist,
+    setDiscoverWeekly,
+  } = useContext(PlayerContext);
 
-	useEffect(() => {
-		const hash = getTokenFromResponse();
-		window.location.hash = '';
-		const _token = hash.access_token;
+  useEffect(() => {
+    const hash = getTokenFromResponse();
+    window.location.hash = '';
+    const _token = hash.access_token;
 
-		console.log(_token);
+    console.log(_token);
 
-		if (token) {
-			setToken(token);
-			setUser();
-			setPlaylist();
-			setDiscoverWeekly();
-		} else if (_token) {
-			setToken(_token);
-			setUser();
-			setPlaylist();
-			setDiscoverWeekly();
-		}
-	}, []);
+    if (token) {
+      setToken(token);
+      setUser();
+      setPlaylist();
+      setDiscoverWeekly();
+    } else if (_token) {
+      setToken(_token);
+      setUser();
+      setPlaylist();
+      setDiscoverWeekly();
+    }
+    //eslint-disable-next-line
+  }, []);
 
-	return <div className='app'>{token ? <Player /> : <Login />}</div>;
+  return <div className="app">{token ? <Player /> : <Login />}</div>;
 }
 
 export default App;
